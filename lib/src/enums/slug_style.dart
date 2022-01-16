@@ -55,5 +55,4 @@ enum SlugStyle {
   runner,
   weather,
   grenade,
-  point,
 }

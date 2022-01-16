@@ -99,7 +99,6 @@ enum SlugStyle {
   clock,
   earth,
   weather,
-  point,
 }
 
 ```
