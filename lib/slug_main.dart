@@ -193,16 +193,35 @@ class SimpleProgress extends Progress {
 
 class AnsiProgress extends Progress {
   static const List<String> kAnimationItems = [
-    "⠋",
+    "⠁",
+    "⠁",
+    "⠉",
     "⠙",
-    "⠹",
-    "⠸",
-    "⠼",
+    "⠚",
+    "⠒",
+    "⠂",
+    "⠂",
+    "⠒",
+    "⠲",
     "⠴",
+    "⠤",
+    "⠄",
+    "⠄",
+    "⠤",
+    "⠠",
+    "⠠",
+    "⠤",
     "⠦",
-    "⠧",
-    "⠇",
-    "⠏"
+    "⠖",
+    "⠒",
+    "⠐",
+    "⠐",
+    "⠒",
+    "⠓",
+    "⠋",
+    "⠉",
+    "⠈",
+    "⠈"
   ];
 
   final Ansi ansi;
