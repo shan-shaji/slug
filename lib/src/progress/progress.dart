@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:slug/src/ansi.dart';
-import 'package:slug/src/logger/slug_log.dart';
+import 'package:slug/src/progress/slug_log.dart';
 
 /// A handle to an indeterminate progress display.
 abstract class Progress {
@@ -97,11 +97,12 @@ class AnsiProgress extends Progress {
     }
   }
 
-  void _updateDisplay(
-      {bool isFinal = false,
-      bool cancelled = false,
-      String? message,
-      bool showTiming = false}) {
+  void _updateDisplay(  {
+    bool isFinal = false,
+    bool cancelled = false,
+    String? message,
+    bool showTiming = false,
+  }) {
     var char =
         ansi.greenF(kAnimationItems[_timer.tick % kAnimationItems.length]);
     if (isFinal || cancelled) {

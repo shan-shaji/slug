@@ -1,17 +1,12 @@
 import 'dart:io' as io;
 
 import 'package:slug/slug.dart';
-import 'package:slug/src/logger/slug_log.dart';
 
-
-class StandardLogger implements Slug {
+class SlugProgress implements Slug {
   @override
   Ansi ansi;
 
-  StandardLogger({Ansi? ansi}) : ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
-
-  @override
-  bool get isVerbose => false;
+  SlugProgress({Ansi? ansi}) : ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
 
   Progress? _currentProgress;
 
@@ -53,7 +48,6 @@ class StandardLogger implements Slug {
   @override
   Progress progress(String message) {
     _cancelProgress();
-
     var progress = ansi.useAnsi
         ? AnsiProgress(ansi, message)
         : SimpleProgress(this, message);

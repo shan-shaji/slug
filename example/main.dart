@@ -2,8 +2,7 @@ import 'dart:async';
 import 'package:slug/slug.dart';
 
 Future<void> main(List<String> args) async {
-  var verbose = args.contains('-v');
-  var logger = verbose ? Slug.verbose() : Slug.standard(ansi: Ansi(true));
+  var logger =  Slug.standard(ansi: Ansi(true));
 
   logger.stdout('Hello world!');
   logger.trace('message 1');
