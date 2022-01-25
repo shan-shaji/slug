@@ -4,27 +4,27 @@ import 'package:slug/slug.dart';
 Future<void> main(List<String> args) async {
   print("\n");
 
-  var logger = Slug.standard(
+  var slug = Slug(
     ansi: Ansi(true),
     slugStyle: SlugStyle.growHorizontal,
   );
 
-  var slug2 = Slug.standard(
+  var slug2 = Slug(
     ansi: Ansi(true),
     slugStyle: SlugStyle.growVertical,
   );
 
-  var slug3 = Slug.standard(
+  var slug3 = Slug(
     ansi: Ansi(true),
     slugStyle: SlugStyle.dots,
   );
 
-  var slug4 = Slug.standard(
+  var slug4 = Slug(
     ansi: Ansi(true),
     slugStyle: SlugStyle.line,
   );
 
-  var slug5 = Slug.standard(
+  var slug5 = Slug(
     ansi: Ansi(true),
     slugStyle: SlugStyle.toggle7,
   );
@@ -33,7 +33,7 @@ Future<void> main(List<String> args) async {
   await Future.delayed(Duration(seconds: 2));
   progress.finish(showTiming: true, message: "Completed!");
 
-  progress = logger.progress('doing some work');
+  progress = slug.progress('doing some work');
   await Future.delayed(Duration(seconds: 2));
   progress.finish(showTiming: true, message: "Completed!");
 
