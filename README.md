@@ -4,10 +4,7 @@
 	<p align="center"><b>Terminal progress with different spinners.</b>  </p>
 </p>
 
-<p align="center"> 
-<iframe src="https://giphy.com/embed/SnJBm9UZRYYJ4bfzks" width="480" height="294" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/SnJBm9UZRYYJ4bfzks">Video</a></p>
-</p>
-
+[Video](https://giphy.com/embed/SnJBm9UZRYYJ4bfzks)
 
 ## Install
 
