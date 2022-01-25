@@ -1,10 +1,9 @@
-
 import 'dart:async';
 import 'package:slug/slug.dart';
 
 Future<void> main(List<String> args) async {
   var verbose = args.contains('-v');
-  var logger = verbose ? Logger.verbose() : Logger.standard();
+  var logger = verbose ? Slug.verbose() : Slug.standard(ansi: Ansi(true));
 
   logger.stdout('Hello world!');
   logger.trace('message 1');
@@ -16,9 +15,4 @@ Future<void> main(List<String> args) async {
   await Future.delayed(Duration(seconds: 2));
   progress.finish(showTiming: true);
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
-
-  var newLogger = StandardLogger(ansi: Ansi(true));
-  var newProgress = newLogger.progress("This is awesome");
-  await Future.delayed(Duration(seconds: 2));
-  newProgress.finish(showTiming: true);
 }
