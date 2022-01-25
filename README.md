@@ -4,7 +4,7 @@
 	<p align="center"><b>Terminal progress with different spinners.</b>  </p>
 </p>
 
-![GIf](https://media.giphy.com/media/sRviOwaWUF1RH5U2ic/giphy.gif) 
+![GIf](assets/video.gif) 
 
 ## Install
 
@@ -19,12 +19,10 @@
 ```dart
 
   var slug = Slug(
-    ansi: Ansi(true),
     slugStyle: SlugStyle.toggle7,
   );
 
   var slug1 = Slug(
-    ansi: Ansi(true),
     slugStyle: SlugStyle.noise,
   );
 
