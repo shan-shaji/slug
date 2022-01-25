@@ -46,6 +46,7 @@ class SimpleProgress extends Progress {
 class AnsiProgress extends Progress {
   var ch = Chalk();
   late SlugStyle _slugStyle;
+  late List<String> _frames;
 
   final Ansi ansi;
 
@@ -54,7 +55,9 @@ class AnsiProgress extends Progress {
   AnsiProgress(this.ansi, String message, SlugStyle slugStyle)
       : super(message) {
     _slugStyle = slugStyle;
-    _timer = Timer.periodic(Duration(milliseconds: 80), (t) {
+    Spinner spinner = getFrame(slugStyle);
+    _frames = spinner.frames;
+    _timer = Timer.periodic(Duration(milliseconds: spinner.interval), (t) {
       _updateDisplay();
     });
     io.stdout.write('$message  '.padRight(40));
@@ -95,12 +98,12 @@ class AnsiProgress extends Progress {
     bool showTiming = false,
     String? symbol,
   }) {
-    Spinner spinner = getFrame(_slugStyle);
-    var char = ch.green(spinner.frames[_timer.tick % spinner.frames.length]);
+    var char = ch.green(_frames[_timer.tick % _frames.length]);
     if (isFinal || cancelled) {
       char = '';
     }
     io.stdout.write('${ansi.backspace}$char');
+
     if (isFinal || cancelled) {
       if (message != null) {
         io.stdout.write(message.isEmpty ? ' ' : message);
