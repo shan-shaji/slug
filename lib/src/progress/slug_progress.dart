@@ -1,12 +1,17 @@
 import 'dart:io' as io;
 
 import 'package:slug/slug.dart';
+import 'package:slug/src/enums/slug_style.dart';
 
 class SlugProgress implements Slug {
   @override
   Ansi ansi;
 
-  SlugProgress({Ansi? ansi}) : ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
+  SlugStyle slugStyle;
+
+  SlugProgress({Ansi? ansi, SlugStyle? slugStyle})
+      : slugStyle = slugStyle ?? SlugStyle.dots,
+        ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
 
   Progress? _currentProgress;
 
@@ -21,9 +26,6 @@ class SlugProgress implements Slug {
     _cancelProgress();
     print(message);
   }
-
-  @override
-  void trace(String message) {}
 
   @override
   void write(String message) {
@@ -49,13 +51,9 @@ class SlugProgress implements Slug {
   Progress progress(String message) {
     _cancelProgress();
     var progress = ansi.useAnsi
-        ? AnsiProgress(ansi, message)
+        ? AnsiProgress(ansi, message, slugStyle)
         : SimpleProgress(this, message);
     _currentProgress = progress;
     return progress;
   }
-
-  @override
-  @Deprecated('This method will be removed in the future')
-  void flush() {}
 }

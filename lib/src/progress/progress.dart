@@ -3,8 +3,12 @@ library cli_logging;
 import 'dart:async';
 import 'dart:io' as io;
 
+import 'package:chalk/chalk.dart';
 import 'package:slug/src/ansi.dart';
+import 'package:slug/src/enums/slug_style.dart';
+import 'package:slug/src/helpers/spinners.dart';
 import 'package:slug/src/progress/slug_log.dart';
+import 'package:chalk/chalk.dart' as chlk;
 
 /// A handle to an indeterminate progress display.
 abstract class Progress {
@@ -20,6 +24,9 @@ abstract class Progress {
 
   /// Cancel the indeterminate progress display.
   void cancel();
+
+  ///
+  void error({String? message, bool showTiming = false});
 }
 
 class SimpleProgress extends Progress {
@@ -34,50 +41,28 @@ class SimpleProgress extends Progress {
 
   @override
   void finish({String? message, bool showTiming = false}) {}
+
+  @override
+  void error({String? message, bool showTiming = false}) {
+    // TODO: implement error
+  }
 }
 
 class AnsiProgress extends Progress {
-  static const List<String> kAnimationItems = [
-    "⠁",
-    "⠁",
-    "⠉",
-    "⠙",
-    "⠚",
-    "⠒",
-    "⠂",
-    "⠂",
-    "⠒",
-    "⠲",
-    "⠴",
-    "⠤",
-    "⠄",
-    "⠄",
-    "⠤",
-    "⠠",
-    "⠠",
-    "⠤",
-    "⠦",
-    "⠖",
-    "⠒",
-    "⠐",
-    "⠐",
-    "⠒",
-    "⠓",
-    "⠋",
-    "⠉",
-    "⠈",
-    "⠈"
-  ];
+  var ch = Chalk();
+  late SlugStyle _slugStyle;
 
   final Ansi ansi;
 
   late final Timer _timer;
 
-  AnsiProgress(this.ansi, String message) : super(message) {
+  AnsiProgress(this.ansi, String message, SlugStyle slugStyle)
+      : super(message) {
+    _slugStyle = slugStyle;
     _timer = Timer.periodic(Duration(milliseconds: 80), (t) {
       _updateDisplay();
     });
-    io.stdout.write('$message...  '.padRight(40));
+    io.stdout.write('$message  '.padRight(40));
     _updateDisplay();
   }
 
@@ -93,18 +78,30 @@ class AnsiProgress extends Progress {
   void finish({String? message, bool showTiming = false}) {
     if (_timer.isActive) {
       _timer.cancel();
-      _updateDisplay(isFinal: true, message: message, showTiming: showTiming);
+      _updateDisplay(
+        isFinal: true,
+        message: ch.green(
+          "✔ $message",
+          ftFace: ChalkFtFace.bold,
+        ),
+        showTiming: showTiming,
+        symbol: ch.green(
+          '✔',
+          ftFace: ChalkFtFace.bold,
+        ),
+      );
     }
   }
 
-  void _updateDisplay(  {
+  void _updateDisplay({
     bool isFinal = false,
     bool cancelled = false,
     String? message,
     bool showTiming = false,
+    String? symbol,
   }) {
-    var char =
-        ansi.greenF(kAnimationItems[_timer.tick % kAnimationItems.length]);
+    Spinner spinner = getFrame(_slugStyle);
+    var char = ansi.greenF(spinner.frames[_timer.tick % spinner.frames.length]);
     if (isFinal || cancelled) {
       char = '';
     }
@@ -114,11 +111,24 @@ class AnsiProgress extends Progress {
         io.stdout.write(message.isEmpty ? ' ' : message);
       } else if (showTiming) {
         var time = (elapsed.inMilliseconds / 1000.0).toStringAsFixed(1);
-        io.stdout.write('${time}s');
+        io.stdout.write('${symbol ?? ""} $time s');
       } else {
         io.stdout.write(' ');
       }
       io.stdout.writeln();
+    }
+  }
+
+  @override
+  void error({String? message, bool showTiming = false}) {
+    if (_timer.isActive) {
+      _timer.cancel();
+      _updateDisplay(
+        isFinal: true,
+        message: ch.red("✖ $message", ftFace: ChalkFtFace.bold),
+        showTiming: showTiming,
+        symbol: ch.red("✖", ftFace: ChalkFtFace.bold),
+      );
     }
   }
 }

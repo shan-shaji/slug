@@ -1,3 +1,4 @@
+import 'package:slug/src/enums/slug_style.dart';
 import 'package:slug/src/progress/progress.dart';
 import 'package:slug/src/ansi.dart';
 import 'package:slug/src/progress/slug_progress.dart';
@@ -6,7 +7,8 @@ import 'package:slug/src/progress/slug_progress.dart';
 /// standard status messages, trace level output, and indeterminate progress.
 abstract class Slug {
   /// Create a normal [Slug]; this logger will not display trace level output.
-  factory Slug.standard({Ansi? ansi}) => SlugProgress(ansi: ansi);
+  factory Slug.standard({Ansi? ansi, SlugStyle? slugStyle}) =>
+      SlugProgress(ansi: ansi, slugStyle: slugStyle);
 
   Ansi get ansi;
 
@@ -16,9 +18,6 @@ abstract class Slug {
   /// Print a standard status message.
   void stdout(String message);
 
-  /// Print trace output.
-  void trace(String message);
-
   /// Print text to stdout, without a trailing newline.
   void write(String message);
 
@@ -27,8 +26,4 @@ abstract class Slug {
 
   /// Start an indeterminate progress display.
   Progress progress(String message);
-
-  /// Flush any un-written output.
-  @Deprecated('This method will be removed in the future')
-  void flush();
 }
