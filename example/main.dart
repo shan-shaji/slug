@@ -6,7 +6,7 @@ Future<void> main(List<String> args) async {
 
   var slug = Slug(
     ansi: Ansi(true),
-    slugStyle: SlugStyle.arrow3,
+    slugStyle: SlugStyle.star,
   );
 
   var slug2 = Slug(
@@ -29,7 +29,16 @@ Future<void> main(List<String> args) async {
     slugStyle: SlugStyle.toggle7,
   );
 
+  var slug6 = Slug(
+    ansi: Ansi(true),
+    slugStyle: SlugStyle.noise,
+  );
+
   var progress = slug5.progress('doing some work');
+  await Future.delayed(Duration(seconds: 2));
+  progress.finish(showTiming: true, message: "Completed!");
+
+  progress = slug6.progress('doing some work');
   await Future.delayed(Duration(seconds: 2));
   progress.finish(showTiming: true, message: "Completed!");
 
