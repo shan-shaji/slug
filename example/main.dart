@@ -6,7 +6,7 @@ Future<void> main(List<String> args) async {
 
   var slug = Slug(
     ansi: Ansi(true),
-    slugStyle: SlugStyle.growHorizontal,
+    slugStyle: SlugStyle.arrow3,
   );
 
   var slug2 = Slug(

@@ -1,4 +1,6 @@
 import 'package:slug/slug.dart';
+import 'package:slug/src/progress/ansi_progress.dart';
+import 'package:slug/src/progress/simple_progress.dart';
 
 class SlugProgress implements Slug {
   @override
