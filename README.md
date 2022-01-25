@@ -8,8 +8,9 @@
 
 ## Install
 
-```
-$ dart pub add slug
+```dart
+
+ dart pub add slug
 
 ```
 
