@@ -1,7 +1,4 @@
-import 'dart:io' as io;
-
 import 'package:slug/slug.dart';
-import 'package:slug/src/enums/slug_style.dart';
 
 class SlugProgress implements Slug {
   @override
@@ -16,27 +13,9 @@ class SlugProgress implements Slug {
   Progress? _currentProgress;
 
   @override
-  void stderr(String message) {
-    _cancelProgress();
-    io.stderr.writeln(message);
-  }
-
-  @override
   void stdout(String message) {
     _cancelProgress();
     print(message);
-  }
-
-  @override
-  void write(String message) {
-    _cancelProgress();
-    io.stdout.write(message);
-  }
-
-  @override
-  void writeCharCode(int charCode) {
-    _cancelProgress();
-    io.stdout.writeCharCode(charCode);
   }
 
   void _cancelProgress() {

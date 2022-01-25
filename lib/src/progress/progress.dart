@@ -1,5 +1,3 @@
-library cli_logging;
-
 import 'dart:async';
 import 'dart:io' as io;
 
@@ -8,7 +6,6 @@ import 'package:slug/src/ansi.dart';
 import 'package:slug/src/enums/slug_style.dart';
 import 'package:slug/src/helpers/spinners.dart';
 import 'package:slug/src/progress/slug_log.dart';
-import 'package:chalk/chalk.dart' as chlk;
 
 /// A handle to an indeterminate progress display.
 abstract class Progress {
@@ -30,10 +27,10 @@ abstract class Progress {
 }
 
 class SimpleProgress extends Progress {
-  final Slug logger;
+  final Slug slug;
 
-  SimpleProgress(this.logger, String message) : super(message) {
-    logger.stdout('$message...');
+  SimpleProgress(this.slug, String message) : super(message) {
+    slug.stdout('$message...');
   }
 
   @override
@@ -43,9 +40,7 @@ class SimpleProgress extends Progress {
   void finish({String? message, bool showTiming = false}) {}
 
   @override
-  void error({String? message, bool showTiming = false}) {
-    // TODO: implement error
-  }
+  void error({String? message, bool showTiming = false}) {}
 }
 
 class AnsiProgress extends Progress {
@@ -101,7 +96,7 @@ class AnsiProgress extends Progress {
     String? symbol,
   }) {
     Spinner spinner = getFrame(_slugStyle);
-    var char = ansi.greenF(spinner.frames[_timer.tick % spinner.frames.length]);
+    var char = ch.green(spinner.frames[_timer.tick % spinner.frames.length]);
     if (isFinal || cancelled) {
       char = '';
     }
