@@ -31,7 +31,7 @@ Future<void> main(List<String> args) async {
 
   var slug6 = Slug(
     ansi: Ansi(true),
-    slugStyle: SlugStyle.noise,
+    slugStyle: SlugStyle.arrow,
   );
 
   var progress = slug5.progress('doing some work');

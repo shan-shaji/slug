@@ -30,10 +30,13 @@
 
   var progress = slug.progress('doing some work');
   await Future.delayed(Duration(seconds: 2));
-  progress.finish(showTiming: true, message: "Completed!");
+  progress.finish(message: "Completed!");
 
   progress = slug1.progress('doing some work');
   await Future.delayed(Duration(seconds: 2));
   progress.finish(showTiming: true, message: "Completed!");
 
 ```
+
+Inspired from [Ora](https://github.com/sindresorhus/ora) and [cli_util](https://github.com/dart-lang/cli_util). Thank you [sindresorhus](https://github.com/sindresorhus) for the amazing collection of spinners.
+

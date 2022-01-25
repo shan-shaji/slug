@@ -42,17 +42,19 @@ class AnsiProgress extends Progress {
       _updateDisplay(
         isFinal: true,
         message: ch.green(
-          " $tick ${message ?? ''}",
+          "$tick ${message ?? ''} ${showTiming ? time + 's' : ""}",
           ftFace: ChalkFtFace.bold,
         ),
         showTiming: showTiming,
         symbol: ch.green(
-          ' $tick',
+          tick,
           ftFace: ChalkFtFace.bold,
         ),
       );
     }
   }
+
+  String get time => (elapsed.inMilliseconds / 1000.0).toStringAsFixed(1);
 
   void _updateDisplay({
     bool isFinal = false,
@@ -65,13 +67,13 @@ class AnsiProgress extends Progress {
     if (isFinal || cancelled) {
       char = '';
     }
+
     io.stdout.write('${ansi.backspace}$char');
     if (isFinal || cancelled) {
       if (message != null) {
         io.stdout.write(message.isEmpty ? ' ' : message);
       } else if (showTiming) {
-        var time = (elapsed.inMilliseconds / 1000.0).toStringAsFixed(1);
-        io.stdout.write(' ${symbol ?? ""} $time s');
+        io.stdout.write('${symbol ?? ""} $time s');
       } else {
         io.stdout.write(' ');
       }
@@ -85,9 +87,11 @@ class AnsiProgress extends Progress {
       _timer.cancel();
       _updateDisplay(
         isFinal: true,
-        message: ch.red(" $cross ${message ?? ''}", ftFace: ChalkFtFace.bold),
+        message: ch.red(
+            "$cross ${message ?? ''} ${showTiming ? time + 's' : ""}",
+            ftFace: ChalkFtFace.bold),
         showTiming: showTiming,
-        symbol: ch.red(" $cross", ftFace: ChalkFtFace.bold),
+        symbol: ch.red(cross, ftFace: ChalkFtFace.bold),
       );
     }
   }
