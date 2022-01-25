@@ -4,7 +4,10 @@
 	<p align="center"><b>Terminal progress with different spinners.</b>  </p>
 </p>
 
-![GIf](assets/video.gif) 
+<div align="center">
+  <image align ="center" src="https://media.giphy.com/media/XKZvZdKh95JfcZorri/giphy.gif">
+</div>
+
 
 ## Install
 
