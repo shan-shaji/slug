@@ -3,8 +3,10 @@ import 'package:slug/src/enums/slug_style.dart';
 class Spinner {
   List<String> frames = [];
   int interval = 80;
+  bool isLinear;
 
-  Spinner({required this.frames, required this.interval});
+  Spinner(
+      {required this.frames, required this.interval, this.isLinear = false});
 }
 
 Spinner getFrame(slugStyle) {
@@ -415,27 +417,28 @@ Spinner getFrame(slugStyle) {
       return Spinner(
         frames: ["⬆️ ", "↗️ ", "➡️ ", "↘️ ", "⬇️ ", "↙️ ", "⬅️ ", "↖️ "],
         interval: 80,
+        isLinear: true,
       );
     case SlugStyle.arrow3:
       return Spinner(
         frames: ["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"],
         interval: 100,
+        isLinear: true,
       );
     case SlugStyle.smiley:
       return Spinner(
         frames: ["😄 ", "😝 "],
         interval: 300,
+        isLinear: true,
       );
     case SlugStyle.monkey:
       return Spinner(
-        frames: ["🙈 ", "🙈 ", "🙉 ", "🙊 "],
-        interval: 200,
-      );
+          frames: ["🙈 ", "🙈 ", "🙉 ", "🙊 "], interval: 200, isLinear: true);
     case SlugStyle.hearts:
       return Spinner(
-        frames: ["💛 ", "💙 ", "💜 ", "💚 ", "❤️ "],
-        interval: 100,
-      );
+          frames: ["💛 ", "💙 ", "💜 ", "💚 ", "❤️ "],
+          interval: 100,
+          isLinear: true);
     case SlugStyle.clock:
       return Spinner(
         frames: [
@@ -453,11 +456,13 @@ Spinner getFrame(slugStyle) {
           "🕚 "
         ],
         interval: 100,
+        isLinear: true,
       );
     case SlugStyle.earth:
       return Spinner(
         frames: ["🌍 ", "🌎 ", "🌏 "],
         interval: 100,
+        isLinear: true,
       );
     default:
       return Spinner(

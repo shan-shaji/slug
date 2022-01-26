@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io' as io;
 
+import 'package:ansi_escapes/ansi_escapes.dart';
 import 'package:chalk/chalk.dart';
 import 'package:slug/src/helpers/ansi.dart';
 import 'package:slug/src/enums/slug_style.dart';
@@ -11,16 +12,16 @@ import 'package:slug/src/progress/progress.dart';
 class AnsiProgress extends Progress {
   var ch = Chalk();
   late List<String> _frames;
-
+  late Spinner _spinner;
   final Ansi ansi;
 
   late final Timer _timer;
 
   AnsiProgress(this.ansi, String message, SlugStyle slugStyle)
       : super(message) {
-    Spinner spinner = getFrame(slugStyle);
-    _frames = spinner.frames;
-    _timer = Timer.periodic(Duration(milliseconds: spinner.interval), (t) {
+    _spinner = getFrame(slugStyle);
+    _frames = _spinner.frames;
+    _timer = Timer.periodic(Duration(milliseconds: _spinner.interval), (t) {
       _updateDisplay();
     });
     io.stdout.write('$message  '.padRight(40));
@@ -68,8 +69,10 @@ class AnsiProgress extends Progress {
       char = '';
     }
 
-    io.stdout.write('${ansi.backspace}$char');
+    io.stdout.write(ansiEscapes.cursorHide);
+    io.stdout.write('${ansi.backspace}$char${_spinner.isLinear ? "\b" : ""}');
     if (isFinal || cancelled) {
+      io.stdout.write(ansiEscapes.cursorShow);
       if (message != null) {
         io.stdout.write(message.isEmpty ? ' ' : message);
       } else if (showTiming) {
