@@ -7,7 +7,7 @@ import 'package:slug/src/progress/slug_progress.dart';
 /// indeterminate progress.
 abstract class Slug {
   /// Create a normal [Slug];
-  factory Slug({Ansi? ansi, SlugStyle? slugStyle}) =>
+  factory Slug({Ansi? ansi, SlugStyle? slugStyle, }) =>
       SlugProgress(ansi: ansi, slugStyle: slugStyle);
 
   Ansi get ansi;

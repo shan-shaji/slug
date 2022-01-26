@@ -17,8 +17,11 @@ class AnsiProgress extends Progress {
 
   late final Timer _timer;
 
-  AnsiProgress(this.ansi, String message, SlugStyle slugStyle)
-      : super(message) {
+  AnsiProgress(
+    this.ansi,
+    String message,
+    SlugStyle slugStyle,
+  ) : super(message) {
     _spinner = getFrame(slugStyle);
     _frames = _spinner.frames;
     _timer = Timer.periodic(Duration(milliseconds: _spinner.interval), (t) {
@@ -37,7 +40,10 @@ class AnsiProgress extends Progress {
   }
 
   @override
-  void finish({String? message, bool showTiming = false}) {
+  void finish({
+    String? message,
+    bool showTiming = false,
+  }) {
     if (_timer.isActive) {
       _timer.cancel();
       _updateDisplay(
@@ -68,7 +74,6 @@ class AnsiProgress extends Progress {
     if (isFinal || cancelled) {
       char = '';
     }
-
     io.stdout.write(ansiEscapes.cursorHide);
     io.stdout.write('${ansi.backspace}$char${_spinner.isLinear ? "\b" : ""}');
     if (isFinal || cancelled) {
@@ -85,7 +90,10 @@ class AnsiProgress extends Progress {
   }
 
   @override
-  void error({String? message, bool showTiming = false}) {
+  void error({
+    String? message,
+    bool showTiming = false,
+  }) {
     if (_timer.isActive) {
       _timer.cancel();
       _updateDisplay(
