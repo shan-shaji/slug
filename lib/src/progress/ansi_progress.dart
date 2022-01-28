@@ -14,7 +14,6 @@ class AnsiProgress extends Progress {
   late List<String> _frames;
   late Spinner _spinner;
   final Ansi ansi;
-
   late final Timer _timer;
 
   AnsiProgress(

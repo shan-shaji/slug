@@ -11,7 +11,10 @@ abstract class Slug {
     Ansi? ansi,
     SlugStyle? slugStyle,
   }) =>
-      SlugProgress(ansi: ansi, slugStyle: slugStyle);
+      SlugProgress(
+        ansi: ansi,
+        slugStyle: slugStyle,
+      );
 
   /// Print a standard status message.
   void stdout(String message);

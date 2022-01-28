@@ -1,23 +1,23 @@
 import 'package:slug/slug.dart';
 import 'package:slug/src/progress/ansi_progress.dart';
 import 'package:slug/src/progress/simple_progress.dart';
+import 'dart:io' as io;
 
 class SlugProgress implements Slug {
-  @override
-  Ansi ansi;
+  final Ansi _ansi;
 
-  SlugStyle slugStyle;
-
-  SlugProgress({Ansi? ansi, SlugStyle? slugStyle})
-      : slugStyle = slugStyle ?? SlugStyle.dots,
-        ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
+  final SlugStyle _slugStyle;
 
   Progress? _currentProgress;
+
+  SlugProgress({Ansi? ansi, SlugStyle? slugStyle})
+      : _slugStyle = slugStyle ?? SlugStyle.dots,
+        _ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
 
   @override
   void stdout(String message) {
     _cancelProgress();
-    print(message);
+    io.stdout.write(message);
   }
 
   void _cancelProgress() {
@@ -31,8 +31,8 @@ class SlugProgress implements Slug {
   @override
   Progress progress(String message) {
     _cancelProgress();
-    var progress = ansi.useAnsi
-        ? AnsiProgress(ansi, message, slugStyle)
+    var progress = _ansi.useAnsi
+        ? AnsiProgress(_ansi, message, _slugStyle)
         : SimpleProgress(this, message);
     _currentProgress = progress;
     return progress;
