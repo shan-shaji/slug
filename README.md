@@ -109,7 +109,7 @@ enum SlugStyle {
 
 ✅ Ubuntu <br>
 ✅ Windows <br>
-🟥 Mac OS (Need to test)<br>
+🟥 Mac OS <br>
 
 Inspired from [Ora](https://github.com/sindresorhus/ora) and [cli_util](https://github.com/dart-lang/cli_util). Thank you [sindresorhus](https://github.com/sindresorhus) for the amazing collection of spinners.
 
