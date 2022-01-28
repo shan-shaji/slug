@@ -10,11 +10,10 @@ import 'package:slug/src/helpers/symbols.dart';
 import 'package:slug/src/progress/progress.dart';
 
 class AnsiProgress extends Progress {
-  var ch = Chalk();
   late List<String> _frames;
   late Spinner _spinner;
-  final Ansi ansi;
   late final Timer _timer;
+  final Ansi ansi;
 
   AnsiProgress(
     this.ansi,
@@ -47,12 +46,12 @@ class AnsiProgress extends Progress {
       _timer.cancel();
       _updateDisplay(
         isFinal: true,
-        message: ch.green(
+        message: chalk.green(
           "$tick ${message ?? ''} ${showTiming ? time + 's' : ""}",
           ftFace: ChalkFtFace.bold,
         ),
         showTiming: showTiming,
-        symbol: ch.green(
+        symbol: chalk.green(
           tick,
           ftFace: ChalkFtFace.bold,
         ),
@@ -69,7 +68,7 @@ class AnsiProgress extends Progress {
     bool showTiming = false,
     String? symbol,
   }) {
-    var char = ch.green(_frames[_timer.tick % _frames.length]);
+    var char = chalk.green(_frames[_timer.tick % _frames.length]);
     if (isFinal || cancelled) {
       char = '';
     }
@@ -97,11 +96,14 @@ class AnsiProgress extends Progress {
       _timer.cancel();
       _updateDisplay(
         isFinal: true,
-        message: ch.red(
+        message: chalk.red(
             "$cross ${message ?? ''} ${showTiming ? time + 's' : ""}",
             ftFace: ChalkFtFace.bold),
         showTiming: showTiming,
-        symbol: ch.red(cross, ftFace: ChalkFtFace.bold),
+        symbol: chalk.red(
+          cross,
+          ftFace: ChalkFtFace.bold,
+        ),
       );
     }
   }
