@@ -10,21 +10,29 @@ import 'package:slug/src/helpers/symbols.dart';
 import 'package:slug/src/progress/progress.dart';
 
 class AnsiProgress extends Progress {
+  // Property to assign frames from the [Spinner] object
   late List<String> _frames;
+
+  // Property to assign [Spinner] type based on [SlugStyle]
   late Spinner _spinner;
+
+  // Timer variable to handle frame
   late final Timer _timer;
+
+  // Property to handle cursor visibility by default it will be true.
+  late bool _hideCursor;
+
+  // Property to check of the terminal have ansi support
   final Ansi ansi;
 
-  AnsiProgress(
-    this.ansi,
-    String message,
-    SlugStyle slugStyle,
-  ) : super(message) {
+  AnsiProgress(this.ansi, String message, SlugStyle slugStyle, bool hideCursor)
+      : super(message) {
     _spinner = getFrame(slugStyle);
     _frames = _spinner.frames;
     _timer = Timer.periodic(Duration(milliseconds: _spinner.interval), (t) {
       _updateDisplay();
     });
+    _hideCursor = hideCursor;
     io.stdout.write('$message  '.padRight(40));
     _updateDisplay();
   }
@@ -72,7 +80,9 @@ class AnsiProgress extends Progress {
     if (isFinal || cancelled) {
       char = '';
     }
-    io.stdout.write(ansiEscapes.cursorHide);
+    if (_hideCursor) {
+      io.stdout.write(ansiEscapes.cursorHide);
+    }
     io.stdout.write('${ansi.backspace}$char${_spinner.isLinear ? "\b" : ""}');
     if (isFinal || cancelled) {
       io.stdout.write(ansiEscapes.cursorShow);

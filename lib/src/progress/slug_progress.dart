@@ -10,9 +10,12 @@ class SlugProgress implements Slug {
 
   Progress? _currentProgress;
 
-  SlugProgress({Ansi? ansi, SlugStyle? slugStyle})
+  final bool _hideCursor;
+
+  SlugProgress({SlugStyle? slugStyle, bool? hideCursor})
       : _slugStyle = slugStyle ?? SlugStyle.dots,
-        _ansi = ansi ?? Ansi(Ansi.terminalSupportsAnsi);
+        _ansi = Ansi(Ansi.terminalSupportsAnsi),
+        _hideCursor = hideCursor ?? true;
 
   @override
   void stdout(String message) {
@@ -32,7 +35,7 @@ class SlugProgress implements Slug {
   Progress progress(String message) {
     _cancelProgress();
     var progress = _ansi.useAnsi
-        ? AnsiProgress(_ansi, message, _slugStyle)
+        ? AnsiProgress(_ansi, message, _slugStyle, _hideCursor)
         : SimpleProgress(this, message);
     _currentProgress = progress;
     return progress;

@@ -6,14 +6,17 @@ import 'package:slug/src/progress/slug_progress.dart';
 /// An abstract representation of a [Slug]
 /// indeterminate progress.
 abstract class Slug {
-  /// Create a normal [Slug];
+  /// Create a normal [Slug] instance.
+  /// Have 3 options to specify,
+  /// * [slugStyle] - Specifies the style of the slug.
+  /// * [hideCursor] - boolean to handle visibilty of the cursor
   factory Slug({
-    Ansi? ansi,
     SlugStyle? slugStyle,
+    bool? hideCursor,
   }) =>
       SlugProgress(
-        ansi: ansi,
         slugStyle: slugStyle,
+        hideCursor: hideCursor,
       );
 
   /// Print a standard status message.
