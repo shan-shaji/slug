@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:slug/slug.dart';
 
 Future<void> main(List<String> args) async {

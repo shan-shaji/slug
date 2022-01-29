@@ -1,6 +1,5 @@
 import 'package:slug/src/enums/slug_style.dart';
 import 'package:slug/src/progress/progress.dart';
-import 'package:slug/src/helpers/ansi.dart';
 import 'package:slug/src/progress/slug_progress.dart';
 
 /// An abstract representation of a [Slug]
