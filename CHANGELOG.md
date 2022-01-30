@@ -1,3 +1,6 @@
+# 1.0.0
+Initial stable release
+
 # 1.0.0-dev-2
   - feat: add cursor hide feature, By default cursor will be hidden.
   - __Breaking__ : removed `Ansi` property from the public Api.
