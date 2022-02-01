@@ -98,9 +98,7 @@ enum SlugStyle {
   hearts,
   clock,
   earth,
-  runner,
   weather,
-  grenade,
   point,
   layer
 }

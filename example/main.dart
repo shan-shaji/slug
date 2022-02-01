@@ -8,7 +8,7 @@ Future<void> main(List<String> args) async {
   var slug2 = Slug(slugStyle: SlugStyle.growVertical);
   var slug3 = Slug(slugStyle: SlugStyle.dots);
   var slug4 = Slug(slugStyle: SlugStyle.line);
-  var slug5 = Slug(slugStyle: SlugStyle.toggle7);
+  var slug5 = Slug(slugStyle: SlugStyle.clock);
   var slug6 = Slug(slugStyle: SlugStyle.earth, hideCursor: false);
 
   var progress = slug5.progress('doing some work');
