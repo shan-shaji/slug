@@ -100,7 +100,6 @@ enum SlugStyle {
   earth,
   weather,
   point,
-  layer
 }
 
 ```
