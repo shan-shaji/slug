@@ -56,5 +56,4 @@ enum SlugStyle {
   weather,
   grenade,
   point,
-  layer
 }
