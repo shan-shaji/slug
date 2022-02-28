@@ -10,6 +10,7 @@
 
 [![likes](https://badges.bar/slug/likes)](https://pub.dev/packages/slug)
 [![popularity](https://badges.bar/slug/popularity)](https://pub.dev/packages/slug/score)
+[![pub points](https://badges.bar/slug/pub%20points)](https://pub.dev/packages/slug/score)
 
 ## Install
 
