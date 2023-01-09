@@ -1,3 +1,5 @@
+.idea
+.github
 .dart_tool/
 .packages
 pubspec.lock

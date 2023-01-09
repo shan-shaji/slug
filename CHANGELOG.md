@@ -1,3 +1,9 @@
+# 1.0.2
+- Update repository link
+
+# 1.0.1
+- Documentation Updates
+
 # 1.0.0
 Initial stable release
 
